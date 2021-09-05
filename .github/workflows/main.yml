@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
   workflow_dispatch:
 
 jobs:
@@ -36,5 +33,5 @@ jobs:
         uses: addnab/docker-run-action@v3
         with:
           image: bot:latest
-          options: -d -e BOT_TOKEN=${{secrets.BOT_TOKEN}} -v ${{secrets.DB_DIR}}:/app/db
+          options: -d --restart unless-stopped -e BOT_TOKEN=${{secrets.BOT_TOKEN}} -v ${{secrets.DB_DIR}}:/app/db
           run: node dist/App.js
