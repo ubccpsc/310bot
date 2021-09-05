@@ -100,10 +100,10 @@
   dependencies:
     "@types/node" "*"
 
-"@ubccpsc310/bot-base@^1.0.5":
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/@ubccpsc310/bot-base/-/bot-base-1.0.5.tgz#9343f06c469c1cebeb0cfb6e322b5570290afdf2"
-  integrity sha512-z31Q3p02/tQCo1nCP5zjdYRfR2bJlUh+U0YLcqQn9xMuGBD5Y46iRz4tUZR+bHkgicj8wd+/gqB87HNTdJvOLQ==
+"@ubccpsc310/bot-base@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@ubccpsc310/bot-base/-/bot-base-1.0.7.tgz#7bcb839678a5019fcbb1ac3874999b4fb6935559"
+  integrity sha512-lcqy8tYEt/CnkyVjqM+lsKzvMqvFX4LBCvorppUV2LtpSYhSGLuO1giHoHYPCNkPik/4jpmOsNVq1bNbdogXoA==
   dependencies:
     discord.js "13.1.0"
     nedb "^1.8.0"
