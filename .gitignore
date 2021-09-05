@@ -1,0 +1,14 @@
+# MACOS garbage
+**/.DS_Store
+
+# Ignore TS output
+dist
+
+# NeDB databases
+db
+
+# Normal stuff
+node_modules
+.env
+*~
+*.log
