@@ -5,8 +5,39 @@ Known as `@\bot` in our Discord server.
 All PRs merged to main go live instantly!
 So if you've like a new bot feature in this discord, add it yourself :eyes:
 
-## Contributing
+## Features
 
+### Commands
+In all examples below, the prefix has been set to `$`
+
+#### `$help <commandName>?`
+Displays the list of commands.
+Optionally adding a command name
+will make the bot respond with details about the named command.
+
+Example:
+```
+$help prefix
+```
+
+#### `$prefix <newPrefix>`
+Updates the prefix which bot will listen to for executing commands.
+
+This prefix should be a single, non-alphanumeric number,
+and it should not be one of `@`, `/`, or `#`.
+
+Example:
+```
+$prefix !
+!help
+```
+
+### Other
+- **Mention**: Mentioning the bot in a message to a server channel to have it reply to you with usage instructions
+
+## Development
+
+### Contributing
 To contribute just make a PR into the `main` branch!
 
 1. Click `Fork` button in the top right of the [GitHub page](https://github.com/jyoo980/310bot-2021W)
@@ -15,8 +46,23 @@ To contribute just make a PR into the `main` branch!
 4. Set the base repo and branch to be `ubccpsc/310bot-2021W` and `main`
 5. Click `Create pull request`
 
-## API
+### Requirements
+- [Node 16](https://nodejs.org/en/)
+- [Yarn](https://classic.yarnpkg.com/en/docs/install)
 
+### Configuring Your Environment
+- Create a `.env` file and put it in the root directory of the project.
+    - This file should _never_ be committed to version control.
+- Copy `.env.sample` to the new `.env` file.
+- Modify as necessary to your environment.
+
+### Scripts
+- **`yarn install`**: Gathers all dependencies. This should be run at the start of development on a new clone in the root.
+- **`yarn tsc`**: Compiles the `.ts` files to `.js` files in the `dist/` dir.
+- **`yarn start`**: Runs the bot.
+- **`yarn watch`**: Runs the bot and restarts it if any files are changed.
+
+### API
 To create a Listener or Command:
 1. Create a file in either the [`src/listeners`](./src/listeners) or [`src/commands`](./src/commands) directory
 2. Import the type `Listener` or `Command` from `"@ubccpsc310/bot-base"`
