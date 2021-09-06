@@ -1,11 +1,10 @@
-import {Listener} from "@ubccpsc310/bot-base";
-import Log from "../util/Log";
+import {Listener, Log} from "@ubccpsc310/bot-base";
 
 const ready: Listener<"ready"> = {
     event: "ready",
-    procedure: function (): void {
+    procedure: (): void => {
         Log.info("Bot started 👀");
     }
-}
+};
 
 export default ready;

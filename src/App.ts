@@ -1,5 +1,5 @@
 import {ConfigKey, getConfig} from "./util/Config"; // Unfortunately must be the first import
-import {startDiscord} from "@ubccpsc310/bot-base"
+import {startDiscord} from "@ubccpsc310/bot-base";
 import {Intents} from "discord.js";
 
 startDiscord({
