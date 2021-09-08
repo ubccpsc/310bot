@@ -20,8 +20,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node }}
-        run: yarn version
-        run: yarn install
+      #- name: Install packages
+     #   run: yarn install
       - name: Run linter
         run: yarn lint
       - name: Run tests
