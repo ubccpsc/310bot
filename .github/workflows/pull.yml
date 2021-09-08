@@ -4,13 +4,22 @@ on:
   pull_request:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [16.x]
+
     steps:
       - uses: actions/checkout@v2
-      - name: Install modules
+      - name: Install modules with Node ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
         run: yarn version
         run: yarn install
       - name: Run linter
