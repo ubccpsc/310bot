@@ -1,4 +1,4 @@
-import {getDatabaseController} from "../../../bot-base";
+import {getDatabaseController} from "@ubccpsc310/bot-base";
 
 type BannedWordEntity = {word: string, id: "banned-word"};
 
