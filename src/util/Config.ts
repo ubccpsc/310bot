@@ -4,10 +4,15 @@ import {Log} from "@ubccpsc310/bot-base";
 
 export enum ConfigKey {
     botToken = "botToken",
+    courseStaffId = "courseStaffId",
+    timeoutRoleId = "timeoutRoleId",
 }
 
 const config = {
     [ConfigKey.botToken]: process.env.BOT_TOKEN,
+
+    [ConfigKey.courseStaffId]: "796809476351066132",
+    [ConfigKey.timeoutRoleId]: "811760490451435551",
 };
 
 export const getConfig = (key: ConfigKey): typeof config[ConfigKey] => {

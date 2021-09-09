@@ -32,6 +32,18 @@ $prefix !
 !help
 ```
 
+#### `$ban <word>` and `$unban`
+Bans a word. If someone says this word, they get reassigned to a timeout role for 5 minutes.
+The second command unbans the currently banned word.
+
+These commands can only be used by course staff.
+
+Example:
+```
+$ban an*me
+$unban
+```
+
 ### Other
 - **Mention**: Mentioning the bot in a message to a server channel will have it reply to you with usage instructions
 
