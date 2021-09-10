@@ -8,12 +8,7 @@ const banned: Command = {
     usage: "banned",
     procedure: async (client: Client, message: Message) => {
         const bannedWord = await getBannedWord();
-        let reply;
-        if (bannedWord) {
-            reply = `The current banned word is: ||${bannedWord}||`;
-        } else {
-            reply = "No word is banned at the moment";
-        }
+        const reply = bannedWord ? `The current banned word is: ||${bannedWord}||` : "No word is banned at the moment";
         return message.channel.send(reply);
     },
 };
