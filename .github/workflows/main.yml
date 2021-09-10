@@ -22,34 +22,7 @@ jobs:
           push: false
       -
         name: Print all containers
-        run: |
-          ids=$(docker ps -aq)
-          for id in $ids
-          do
-           echo "$id"
-          done
+        run: docker ps -a
       -
-        name: Clean up containers
-        run: |
-          ids=$(docker ps -aqf "ancestor=bot")
-          for id in $ids
-          do
-           echo "$id"
-           docker kill $id && docker rm $id
-          done
-      -
-        name: Clean up images
-        run: |
-          ids=$(docker images -q --filter reference=bot --filter before=bot:latest)
-          for id in $ids
-          do
-           echo "$id"
-           docker rmi $id
-          done
-      -
-        name: Run
-        uses: addnab/docker-run-action@v3
-        with:
-          image: bot:latest
-          options: -d --restart unless-stopped -e BOT_TOKEN=${{secrets.BOT_TOKEN}} -v ${{secrets.DB_DIR}}:/app/db
-          run: node dist/App.js
+        name: Who am I?
+        run: echo $(whoami)
