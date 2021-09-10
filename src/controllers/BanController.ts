@@ -14,8 +14,8 @@ const getBannedWord = async (): Promise<string> => {
 };
 
 const ban = async (word: string): Promise<void> => {
-    if (/[\n\t\r ]/.test(word)) {
-        throw new Error("Cannot ban a word with whitespace");
+    if (/[\n\t\r ]|\|\|/.test(word)) {
+        throw new Error("Cannot ban a word with whitespace or spoiler marks (||)");
     }
     await db.set<BannedWordEntity>("settings", {id: "banned-word", word: word.toLowerCase()});
     bannedWordCache = word;
