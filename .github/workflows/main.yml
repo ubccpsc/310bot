@@ -38,7 +38,7 @@ jobs:
       -
         name: Clean up old containers
         run: |
-          ids=$(docker ps -aqf "ancestor=bot")
+          ids=$(docker ps -a | awk -v i="^$1.*" '{if($2~"bot"){print$1}}')
           for id in $ids
           do
            echo "$id"
