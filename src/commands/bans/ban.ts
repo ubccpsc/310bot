@@ -22,7 +22,7 @@ const ban: Command = {
                     await banImpl(word);
                     reply = `Banned \`${word.toLowerCase()}\``;
                 } catch (e) {
-                    reply = e;
+                    reply = e?.message ?? `That word can't be banned`;
                 }
             }
         } else {
