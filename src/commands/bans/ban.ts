@@ -18,8 +18,12 @@ const ban: Command = {
                 reply = "You can only ban one word at a time";
             } else {
                 const [word] = args;
-                await banImpl(word);
-                reply = `Banned \`${word.toLowerCase()}\``;
+                try {
+                    await banImpl(word);
+                    reply = `Banned \`${word.toLowerCase()}\``;
+                } catch (e) {
+                    reply = e;
+                }
             }
         } else {
             reply = "Try again when you are a TA";
