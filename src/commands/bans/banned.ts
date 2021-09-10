@@ -7,12 +7,10 @@ const banned: Command = {
     description: "Lists the banned word (if any)",
     usage: "banned",
     procedure: async (client: Client, message: Message) => {
-        const banned_word = await getBannedWord();
+        const bannedWord = await getBannedWord();
         let reply;
-        if (banned_word) {
-            reply = "The current banned word is: ||";
-            reply += banned_word;
-            reply += "||";
+        if (bannedWord) {
+            reply = `The current banned word is: ||${bannedWord}||`;
         } else {
             reply = "No word is banned at the moment";
         }
