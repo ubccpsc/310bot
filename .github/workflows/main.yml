@@ -21,6 +21,14 @@ jobs:
           tags: bot:latest
           push: false
       -
+        name: Print all containers
+        run: |
+          ids=$(docker ps -aq)
+          for id in $ids
+          do
+           echo "$id"
+          done
+      -
         name: Clean up containers
         run: |
           ids=$(docker ps -aqf "ancestor=bot")
