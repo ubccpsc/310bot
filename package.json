@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "mocha --require ts-node/register --timeout 10000 test/**/*.spec.ts",
+    "test": "mocha --require ts-node/register test/**/*.spec.ts",
     "fix": "yarn lint --fix",
     "lint": "eslint src --ext .ts",
     "start": "ts-node src/App.ts",
