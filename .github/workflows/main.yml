@@ -18,7 +18,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           load: true
-          tags: bot:latest
+          tags: bot:${{ github.sha }}
           push: false
       -
         name: Print all containers
