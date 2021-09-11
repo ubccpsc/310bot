@@ -56,7 +56,7 @@ describe("BanController", function (this: Suite) {
             Log.error(err);
             expect.fail("Banning |w|a|t| should have succeeded");
         }
-        expect(await getBannedWord()).to.eql("an*me");
+        expect(await getBannedWord()).to.eql("|w|a|t|");
     });
 
     it("Should ban with other formatting", async function (this: Context) {
@@ -66,7 +66,7 @@ describe("BanController", function (this: Suite) {
             Log.error(err);
             expect.fail("Banning **what**_are_`you`'doing'```here``` should have succeeded");
         }
-        expect(await getBannedWord()).to.eql("an*me");
+        expect(await getBannedWord()).to.eql("**what**_are_`you`'doing'```here```");
     });
 
     it("Should ban a word", async function (this: Context) {
