@@ -14,21 +14,8 @@ const banned: Command = {
     },
 };
 
-// Tentative tests for when testing is added
-// a | *
-// ag | *g
-// agg | *gg
-// aggg | *ggg
-// agggg | *gggg
-// gga | gg*
-// ggga | ggg*
-// gaag | ga*g
-// gaga | g*ga
-// gggga | gggg*
-// gaagg | ga*gg
-// ggaag | gg*ag
-// gagag | g*gag
-
+// Censors a word by replacing the middlemost vowel (if any) with a *. If the word is even, the middle will be
+// considered the character on the right. If there are two vowels equidistant from the middle, the left will be chosen.
 const censorWord = (word: string): string => {
     const middle = Math.round(word.length / 2.0  - 0.5); // This makes the middle on the right size if an even length
     // Find the middle vowel and replace it with a *
@@ -41,7 +28,7 @@ const censorWord = (word: string): string => {
         if (/[aeiou]/.test(middle[left])) {
             word = word.substring(0, left) + "*" + word.substring(left + 1);
             break;
-        } else if (right < word.length && /[aeiou]/.test(middle[right])) {
+        } else if (right < word.length && /[aeiouAEIOU]/.test(middle[right])) {
             // Replace character with a *
             word = word.substring(0, right) + "*" + word.substring(right + 1);
             break;
