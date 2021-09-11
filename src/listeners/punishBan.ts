@@ -24,8 +24,10 @@ const punish: Listener<"messageCreate"> = {
 };
 
 const messageContainsWord = (message: Message, word: string): boolean => {
+    const delimiter = ",";
     const messageContent = message.cleanContent.toLowerCase();
-    const words = messageContent.split(/[\n\t\r ]/);
+    const strippedContent = messageContent.replace(/[^a-zA-Z0-9]+/g, delimiter);
+    const words = strippedContent.split(delimiter);
     return words.includes(word);
 };
 
