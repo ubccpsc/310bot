@@ -30,7 +30,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "mocha --require ts-node/register test/**/*.spec.ts",
+    "test": "mocha --require ts-node/register --extension .spec.ts --recursive test",
     "fix": "yarn lint --fix",
     "lint": "eslint src --ext .ts",
     "start": "ts-node src/App.ts",
