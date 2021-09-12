@@ -8,19 +8,19 @@ describe("punishBan", function () {
         });
 
         it("should flag word in a sentence", function () {
-            expect(contentContainsWord("the", "the word of the day is ban")).to.be.true;
+            expect(contentContainsWord("the word of the day is ban", "the")).to.be.true;
         });
 
         it("should not flag a word in a substring", function () {
-            expect(contentContainsWord("word", "is the word banned?")).to.be.false;
+            expect(contentContainsWord("is the word banned?", "ban")).to.be.false;
         });
 
         it("should flag a word surrounded by special characters", function () {
-            expect(contentContainsWord("banned", "is the word 'banned' allowed?")).to.be.true;
+            expect(contentContainsWord("is the word 'banned' allowed?", "banned")).to.be.true;
         });
 
         it("should flag a word with special characters in it", function () {
-            expect(contentContainsWord("banned", "is the word ba`nn`ed allowed?")).to.be.true;
+            expect(contentContainsWord("is the word ba`nn`ed allowed?", "banned")).to.be.true;
         });
     });
 });
