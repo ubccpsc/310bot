@@ -9,7 +9,7 @@ const punish: Listener<"messageCreate"> = {
     event: "messageCreate",
     procedure: async (client: Client, message: Message) => {
         const bannedWord = await getBannedWord();
-        if (!!bannedWord && messageContainsWord(message, bannedWord)) {
+        if (!!bannedWord && contentContainsWord(message.cleanContent, bannedWord)) {
             if (await isCourseStaff(message)) {
                 Log.debug("Course staff said a bad word but we're letting it go bc power trip time");
             } else if  (message.author.bot) {
@@ -23,9 +23,9 @@ const punish: Listener<"messageCreate"> = {
     }
 };
 
-const messageContainsWord = (message: Message, word: string): boolean => {
+const contentContainsWord = (content: string, word: string): boolean => {
     const delimiter = ",";
-    const messageContent = message.cleanContent.toLowerCase();
+    const messageContent = content.toLowerCase();
     const strippedContent = messageContent.replace(/[^a-zA-Z0-9]+/g, delimiter);
     const words = strippedContent.split(delimiter);
     return words.includes(word);
@@ -58,4 +58,5 @@ const handleForgiveness = (member: GuildMember, oldRoles: string[]) => {
     return Promise.all([...futureAdditions, futureRemoval]);
 };
 
+export {contentContainsWord};
 export default punish;
