@@ -26,7 +26,13 @@ const punish: Listener<"messageCreate"> = {
 const contentContainsWord = (content: string, word: string): boolean => {
     const delimiter = ",";
     const messageContent = content.toLowerCase();
-    const strippedContent = messageContent.replace(/[^a-zA-Z0-9]+/g, delimiter);
+    // https://github.com/stiang/remove-markdown/blob/master/index.js
+    const withoutMarkdown = messageContent
+        .replace(/`(.+?)`/g, '$1') // Remove inline code
+        .replace(/([*_]{1,3})(\S.*?\S?)\1/g, '$2') // Remove emphasis
+        .replace(/([*_]{1,3})(\S.*?\S?)\1/g, '$2') // (repeat the line to remove double emphasis)
+        .replace(/~~(.+?)~~/g, '$1'); // Remove strikethrough
+    const strippedContent = withoutMarkdown.replace(/[^a-zA-Z0-9]+/g, delimiter);
     const words = strippedContent.split(delimiter);
     return words.includes(word);
 };
