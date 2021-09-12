@@ -25,12 +25,56 @@ describe("BanController", function (this: Suite) {
         }
     });
 
+    it("Should not ban with spoiler marks", async function (this: Context) {
+        try {
+            await ban("hello||world");
+            expect.fail("Banning hello||world should have failed");
+        } catch (err) {
+            expect(err).to.be.instanceOf(Error);
+            expect(await getBannedWord()).to.eql("");
+        }
+        try {
+            await ban("something|||else");
+            expect.fail("Banning something|||else should have failed");
+        } catch (err) {
+            expect(err).to.be.instanceOf(Error);
+            expect(await getBannedWord()).to.eql("");
+        }
+        try {
+            await ban("||spoiler||");
+            expect.fail("Banning ||spoiler|| should have failed");
+        } catch (err) {
+            expect(err).to.be.instanceOf(Error);
+            expect(await getBannedWord()).to.eql("");
+        }
+    });
+
+    it("Should ban with single bars", async function (this: Context) {
+        try {
+            await ban("|w|a|t|");
+        } catch (err) {
+            Log.error(err);
+            expect.fail("Banning |w|a|t| should have succeeded");
+        }
+        expect(await getBannedWord()).to.eql("|w|a|t|");
+    });
+
+    it("Should ban with other formatting", async function (this: Context) {
+        try {
+            await ban("**what**_are_`you`'doing'```here```");
+        } catch (err) {
+            Log.error(err);
+            expect.fail("Banning **what**_are_`you`'doing'```here``` should have succeeded");
+        }
+        expect(await getBannedWord()).to.eql("**what**_are_`you`'doing'```here```");
+    });
+
     it("Should ban a word", async function (this: Context) {
         try {
             await ban("an*me");
         } catch (err) {
             Log.error(err);
-            expect.fail("Banning whitespace should have succeeded");
+            expect.fail("Banning an*me should have succeeded");
         }
         expect(await getBannedWord()).to.eql("an*me");
     });
@@ -40,7 +84,7 @@ describe("BanController", function (this: Suite) {
             await ban("MUT*TION");
         } catch (err) {
             Log.error(err);
-            expect.fail("Banning whitespace should have succeeded");
+            expect.fail("Banning MUT*TION should have succeeded");
         }
         expect(await getBannedWord()).to.eql("mut*tion");
     });
