@@ -19,8 +19,24 @@ describe("punishBan", function () {
             expect(contentContainsWord("is the word 'banned' allowed?", "banned")).to.be.true;
         });
 
-        it("should flag a word with special characters in it", function () {
+        it("should flag a word with markdown characters in it", function () {
             expect(contentContainsWord("is the word ba`nn`ed allowed?", "banned")).to.be.true;
+            expect(contentContainsWord("is the word ba_nn_ed allowed?", "banned")).to.be.true;
+            expect(contentContainsWord("is the word ba__nn__ed allowed?", "banned")).to.be.true;
+            expect(contentContainsWord("is the word ba*nn*ed allowed?", "banned")).to.be.true;
+            expect(contentContainsWord("is the word ba**nn**ed allowed?", "banned")).to.be.true;
+            expect(contentContainsWord("is the word ba~~nn~~ed allowed?", "banned")).to.be.true;
+            expect(contentContainsWord("is the ~~word bann~~ed allowed?", "banned")).to.be.true;
+        });
+
+        it("should not flag a word with other characters (or partial markdown characters) in it", function () {
+            expect(contentContainsWord("is the word bann`ed allowed?", "banned")).to.be.false;
+            expect(contentContainsWord("is the word bann'ed allowed?", "banned")).to.be.false;
+            expect(contentContainsWord("is the word bann!ed allowed?", "banned")).to.be.false;
+            expect(contentContainsWord("is the word b~ann~ed allowed?", "banned")).to.be.false;
+            expect(contentContainsWord("is the word bann~~ed allowed?", "banned")).to.be.false;
+            expect(contentContainsWord("is the word bann~~~~ed allowed?", "banned")).to.be.false;
+            expect(contentContainsWord("is the word bann````ed allowed?", "banned")).to.be.false;
         });
     });
 });
