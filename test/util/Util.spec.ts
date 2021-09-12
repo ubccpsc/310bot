@@ -7,6 +7,7 @@ describe("Util", function () {
             expect(removeMarkdown("test _test_ test")).to.equal("test test test");
             expect(removeMarkdown("test *test* test")).to.equal("test test test");
             expect(removeMarkdown("test *test** test")).to.equal("test test* test");
+            expect(removeMarkdown("test *_* test")).to.equal("test _ test");
         });
 
         it("should handle double emphasis", function () {
@@ -37,7 +38,7 @@ describe("Util", function () {
 
         it("should not touch partial tags", function () {
             expect(removeMarkdown("test ||test test")).to.equal("test ||test test");
-            expect(removeMarkdown("test `test~ test")).to.equal("test ~test~ test");
+            expect(removeMarkdown("test `test~ test")).to.equal("test `test~ test");
             expect(removeMarkdown("test *test_ test")).to.equal("test *test_ test");
         });
     });
