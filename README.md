@@ -44,6 +44,9 @@ $ban an*me
 $unban
 ```
 
+##### `$banned`
+This command can be used by everyone to see what word if any is currently banned.
+
 ### Other
 - **Mention**: Mentioning the bot in a message to a server channel will have it reply to you with usage instructions
 
