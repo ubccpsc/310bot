@@ -31,7 +31,8 @@ const contentContainsWord = (content: string, word: string): boolean => {
         .replace(/`(.+?)`/g, '$1') // Remove inline code
         .replace(/([*_]{1,3})(\S.*?\S?)\1/g, '$2') // Remove emphasis
         .replace(/([*_]{1,3})(\S.*?\S?)\1/g, '$2') // (repeat the line to remove double emphasis)
-        .replace(/~~(.+?)~~/g, '$1'); // Remove strikethrough
+        .replace(/~~(.+?)~~/g, '$1') // Remove strikethrough
+        .replace(/\|\|(.+?)\|\|/g, '$1'); // Remove spoilers
     const strippedContent = withoutMarkdown.replace(/[^a-zA-Z0-9]+/g, delimiter);
     const words = strippedContent.split(delimiter);
     return words.includes(word);
