@@ -2,6 +2,7 @@ import {Command} from "@ubccpsc310/bot-base";
 import {Client, Message} from "discord.js";
 import {ban as banImpl} from "../../controllers/BanController";
 import {ConfigKey, getConfig} from "../../util/Config";
+import {removeMarkdown} from "../../util/Util";
 
 const ban: Command = {
     name: "ban",
@@ -18,9 +19,10 @@ const ban: Command = {
                 reply = "You can only ban one word at a time";
             } else {
                 const [word] = args;
+                const cleanedWord = removeMarkdown(word);
                 try {
-                    await banImpl(word);
-                    reply = `Banned \`${word.toLowerCase()}\``;
+                    await banImpl(cleanedWord);
+                    reply = `Banned \`${cleanedWord.toLowerCase()}\``;
                 } catch (e) {
                     reply = e?.message ?? `That word can't be banned`;
                 }
