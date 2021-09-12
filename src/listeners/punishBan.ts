@@ -2,6 +2,7 @@ import {Listener, Log} from "@ubccpsc310/bot-base";
 import {Client, GuildMember, Message} from "discord.js";
 import {getBannedWord} from "../controllers/BanController";
 import {ConfigKey, getConfig} from "../util/Config";
+import {removeMarkdown} from "../util/Util";
 
 const FIVE_MINUTES_MS = 5 * 60 * 1000;
 
@@ -26,13 +27,7 @@ const punish: Listener<"messageCreate"> = {
 const contentContainsWord = (content: string, word: string): boolean => {
     const delimiter = ",";
     const messageContent = content.toLowerCase();
-    // https://github.com/stiang/remove-markdown/blob/master/index.js
-    const withoutMarkdown = messageContent
-        .replace(/`(.+?)`/g, '$1') // Remove inline code
-        .replace(/([*_]{1,3})(\S.*?\S?)\1/g, '$2') // Remove emphasis
-        .replace(/([*_]{1,3})(\S.*?\S?)\1/g, '$2') // (repeat the line to remove double emphasis)
-        .replace(/~~(.+?)~~/g, '$1') // Remove strikethrough
-        .replace(/\|\|(.+?)\|\|/g, '$1'); // Remove spoilers
+    const withoutMarkdown = removeMarkdown(messageContent);
     const strippedContent = withoutMarkdown.replace(/[^a-zA-Z0-9]+/g, delimiter);
     const words = strippedContent.split(delimiter);
     return words.includes(word);

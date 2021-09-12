@@ -17,6 +17,7 @@ const ban = async (word: string): Promise<void> => {
     if (/\s/.test(word)) {
         throw new Error("Cannot ban a word with whitespace");
     } else if (/\|\|/.test(word)) {
+        // This should never happen (we removed the markdown beforehand) but w/e
         throw new Error("Cannot ban a word with spoiler marks (||)");
     }
     const lowerWord = word.toLowerCase();
