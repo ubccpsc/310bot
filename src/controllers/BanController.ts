@@ -1,6 +1,6 @@
 import {getDatabaseController} from "@ubccpsc310/bot-base";
 
-type BannedWordEntity = {word: string, id: "banned-word"};
+type BannedWordEntity = {word: string, banRequester: string, id: "banned-word"};
 
 const db = getDatabaseController();
 
@@ -13,14 +13,14 @@ const getBannedWord = async (): Promise<string> => {
     return bannedWordCache;
 };
 
-const ban = async (word: string): Promise<void> => {
+const ban = async (word: string, banRequester: string): Promise<void> => {
     if (/\s/.test(word)) {
         throw new Error("Cannot ban a word with whitespace");
     } else if (/\|\|/.test(word)) {
         throw new Error("Cannot ban a word with spoiler marks (||)");
     }
     const lowerWord = word.toLowerCase();
-    await db.set<BannedWordEntity>("settings", {id: "banned-word", word: lowerWord});
+    await db.set<BannedWordEntity>("settings", {id: "banned-word", word: lowerWord, banRequester: banRequester});
     bannedWordCache = lowerWord;
 };
 

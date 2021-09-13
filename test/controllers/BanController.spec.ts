@@ -5,6 +5,9 @@ import {ban, getBannedWord, unban} from "../../src/controllers/BanController";
 import {expect} from "chai";
 
 describe("BanController", function (this: Suite) {
+    
+    const defaultBanRequester: string = "bob's son";
+
     before(async function (this: Context) {
         await clearDatabase();
         Log.info("Database cleared");
@@ -17,7 +20,7 @@ describe("BanController", function (this: Suite) {
 
     it("Should not ban with whitespace", async function (this: Context) {
         try {
-            await ban("  ");
+            await ban("  ", defaultBanRequester);
             expect.fail("Banning whitespace should have failed");
         } catch (err) {
             expect(err).to.be.instanceOf(Error);
@@ -27,21 +30,21 @@ describe("BanController", function (this: Suite) {
 
     it("Should not ban with spoiler marks", async function (this: Context) {
         try {
-            await ban("hello||world");
+            await ban("hello||world", defaultBanRequester);
             expect.fail("Banning hello||world should have failed");
         } catch (err) {
             expect(err).to.be.instanceOf(Error);
             expect(await getBannedWord()).to.eql("");
         }
         try {
-            await ban("something|||else");
+            await ban("something|||else", defaultBanRequester);
             expect.fail("Banning something|||else should have failed");
         } catch (err) {
             expect(err).to.be.instanceOf(Error);
             expect(await getBannedWord()).to.eql("");
         }
         try {
-            await ban("||spoiler||");
+            await ban("||spoiler||", defaultBanRequester);
             expect.fail("Banning ||spoiler|| should have failed");
         } catch (err) {
             expect(err).to.be.instanceOf(Error);
@@ -51,7 +54,7 @@ describe("BanController", function (this: Suite) {
 
     it("Should ban with single bars", async function (this: Context) {
         try {
-            await ban("|w|a|t|");
+            await ban("|w|a|t|", defaultBanRequester);
         } catch (err) {
             Log.error(err);
             expect.fail("Banning |w|a|t| should have succeeded");
@@ -61,7 +64,7 @@ describe("BanController", function (this: Suite) {
 
     it("Should ban with other formatting", async function (this: Context) {
         try {
-            await ban("**what**_are_`you`'doing'```here```");
+            await ban("**what**_are_`you`'doing'```here```", defaultBanRequester);
         } catch (err) {
             Log.error(err);
             expect.fail("Banning **what**_are_`you`'doing'```here``` should have succeeded");
@@ -71,7 +74,7 @@ describe("BanController", function (this: Suite) {
 
     it("Should ban a word", async function (this: Context) {
         try {
-            await ban("an*me");
+            await ban("an*me", defaultBanRequester);
         } catch (err) {
             Log.error(err);
             expect.fail("Banning an*me should have succeeded");
@@ -81,7 +84,7 @@ describe("BanController", function (this: Suite) {
 
     it("Should make banned word lowercase", async function (this: Context) {
         try {
-            await ban("MUT*TION");
+            await ban("MUT*TION", defaultBanRequester);
         } catch (err) {
             Log.error(err);
             expect.fail("Banning MUT*TION should have succeeded");
