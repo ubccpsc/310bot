@@ -13,6 +13,10 @@ const getBannedWord = async (): Promise<string> => {
     return bannedWordCache;
 };
 
+const getBanRequester = async(): Promise<string> => {
+    return (await db.get<BannedWordEntity>("settings", "banned-word")).banRequester;
+};
+
 const ban = async (word: string, banRequester: string): Promise<void> => {
     if (/\s/.test(word)) {
         throw new Error("Cannot ban a word with whitespace");
@@ -29,4 +33,4 @@ const unban = async (): Promise<void> => {
     bannedWordCache = "";
 };
 
-export {ban, unban, getBannedWord};
+export {ban, unban, getBannedWord, getBanRequester};

@@ -1,7 +1,7 @@
 import {Context, Suite} from "mocha";
 import {clearDatabase} from "../harness/Util";
 import {Log} from "@ubccpsc310/bot-base";
-import {ban, getBannedWord, unban} from "../../src/controllers/BanController";
+import {ban, getBannedWord, getBanRequester, unban} from "../../src/controllers/BanController";
 import {expect} from "chai";
 
 describe("BanController", function (this: Suite) {
@@ -80,6 +80,16 @@ describe("BanController", function (this: Suite) {
             expect.fail("Banning an*me should have succeeded");
         }
         expect(await getBannedWord()).to.eql("an*me");
+    });
+
+    it("Should be able to return the ban requester of a banned word", async function (this: Context) {
+        try {
+            await ban("scala", defaultBanRequester);
+        } catch (err) {
+            Log.error(err);
+            expect.fail("Banning 'scala' should have succeeded")
+        }
+        expect(await getBanRequester()).to.eql(defaultBanRequester);
     });
 
     it("Should make banned word lowercase", async function (this: Context) {
