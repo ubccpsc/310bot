@@ -47,6 +47,10 @@ $unban
 ##### `$banned`
 This command can be used by everyone to see what word if any is currently banned.
 
+#### `$whobanned`
+This command can be used by everyone to see the username of the person who has
+requested to ban the current banned world.
+
 ### Other
 - **Mention**: Mentioning the bot in a message to a server channel will have it reply to you with usage instructions
 
