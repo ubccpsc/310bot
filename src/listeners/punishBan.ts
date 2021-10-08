@@ -2,7 +2,7 @@ import {Listener, Log} from "@ubccpsc310/bot-base";
 import {Client, GuildMember, Message} from "discord.js";
 import {getBannedWord} from "../controllers/BanController";
 import {ConfigKey, getConfig} from "../util/Config";
-import {removeMarkdown} from "../util/Util";
+import {isCourseStaff, removeMarkdown} from "../util/Util";
 
 const FIVE_MINUTES_MS = 5 * 60 * 1000;
 
@@ -11,7 +11,7 @@ const punish: Listener<"messageCreate"> = {
     procedure: async (client: Client, message: Message) => {
         const bannedWord = await getBannedWord();
         if (!!bannedWord && contentContainsWord(message.cleanContent, bannedWord)) {
-            if (await isCourseStaff(message)) {
+            if (await isCourseStaff(message.id, message.guild)) {
                 Log.debug("Course staff said a bad word but we're letting it go bc power trip time");
             } else if  (message.author.bot) {
                 Log.debug("Bot said a bad word but we're letting it go bc it doesn't know any better");
@@ -40,12 +40,6 @@ const punishAndScheduleForgiveness = async (member: GuildMember): Promise<void> 
     await handlePunishment(member, oldRoles);
     // Pray there is no server restart at this time lol
     setTimeout(() => handleForgiveness(member, oldRoles), FIVE_MINUTES_MS);
-};
-
-const isCourseStaff = async (message: Message) => {
-    const courseStaffRoleID = getConfig(ConfigKey.courseStaffId);
-    const courseStaffRole = await message.guild.roles.fetch(courseStaffRoleID);
-    return courseStaffRole.members.has(message.author.id);
 };
 
 const handlePunishment = (member: GuildMember, oldRoles: string[]) => {
