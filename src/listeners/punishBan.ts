@@ -11,7 +11,7 @@ const punish: Listener<"messageCreate"> = {
     procedure: async (client: Client, message: Message) => {
         const bannedWord = await getBannedWord();
         if (!!bannedWord && contentContainsWord(message.cleanContent, bannedWord)) {
-            if (await isCourseStaff(message.id, message.guild)) {
+            if (await isCourseStaff(message.author.id, message.guild)) {
                 Log.debug("Course staff said a bad word but we're letting it go bc power trip time");
             } else if  (message.author.bot) {
                 Log.debug("Bot said a bad word but we're letting it go bc it doesn't know any better");
