@@ -16,6 +16,7 @@ RUN apk add --no-cache \
         py-pip
 
 COPY ./src          ./src
+COPY ./data         ./data
 COPY ./package.json ./package.json
 COPY tsconfig.json  ./
 COPY yarn.lock      ./
