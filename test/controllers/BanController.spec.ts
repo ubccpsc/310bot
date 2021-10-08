@@ -5,8 +5,8 @@ import {ban, getBannedWord, getBanRequester, unban} from "../../src/controllers/
 import {expect} from "chai";
 
 describe("BanController", function (this: Suite) {
-    
-    const defaultBanRequester: string = "bob's son";
+
+    const defaultBanRequester = "bob's son";
 
     before(async function (this: Context) {
         await clearDatabase();
