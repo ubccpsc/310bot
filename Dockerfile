@@ -7,6 +7,19 @@ COPY ./package.json ./package.json
 COPY tsconfig.json  ./
 COPY yarn.lock      ./
 
+RUN apk add --no-cache \
+        sudo \
+        curl \
+        build-base \
+        g++ \
+        libpng \
+        libpng-dev \
+        jpeg-dev \
+        pango-dev \
+        cairo-dev \
+        giflib-dev \
+        py-pip
+
 RUN yarn install
 RUN yarn tsc
 
