@@ -47,6 +47,10 @@ $unban
 ##### `$banned`
 This command can be used by everyone to see what word if any is currently banned.
 
+
+#### `$makefunny`
+Deepfries a PNG image. Call with the PNG image attached.  
+
 ### Other
 - **Mention**: Mentioning the bot in a message to a server channel will have it reply to you with usage instructions
 
