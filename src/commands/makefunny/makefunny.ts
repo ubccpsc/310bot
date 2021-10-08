@@ -1,17 +1,13 @@
-import { Command } from "@ubccpsc310/bot-base";
+import { Command, Log } from "@ubccpsc310/bot-base";
 import { Client, Message } from "discord.js";
 
 // Roses are red
 // Violets do grow
 // I don't know shit about javascript
 // but I can copy from stackoverflow
-import imagizer = require("imagizer");
-// const request = require('request');
+import * as imagizer from "imagizer";
 import request from "request";
 import * as fs from 'fs';
-
-
-
 
 const bufferpath = "./data/buffer.png";
 
@@ -20,10 +16,8 @@ const makefunny: Command = {
     description: "Makes an image funny",
     usage: "makefunny on a message with a png attached",
     procedure: async (client: Client, message: Message) => {
-        if (message.attachments.size == 1) {
-            // 
-            // const imageurl = message.attachments.entries().next().value[1].attachment;
-
+        if (message.attachments.size === 1) {
+            await message.channel.sendTyping();
             const img = message.attachments.entries().next().value[1];
             const imgurl = img.attachment;
             const imght = img.height;
@@ -36,7 +30,7 @@ const makefunny: Command = {
             }
 
             request.get(imgurl)
-                .on('error', console.error)
+                .on('error', Log.error)
                 .pipe(fs.createWriteStream(bufferpath))
                 .on('finish', () => {
                     const project = new imagizer.Project(imgwt, imght);
@@ -64,8 +58,6 @@ const makefunny: Command = {
                     return message.channel.send({ files: [bufferpath] });
 
                 });
-
-
         }
         else {
             return message.channel.send("ahhhh omg.... jeez I wish you attached an image to me... ah aha just kidding..,.. unless? :pleading_face: :point_right: :point_left:");
