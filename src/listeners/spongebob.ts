@@ -28,11 +28,11 @@ const spongebob: Listener<"messageCreate"> = {
     }
 };
 
-const replaceAllWith = (searches: string[], value: string, starter: string): string => {
-    return searches.reduce<string>((accumulator, search): string =>
-            accumulator.replace(new RegExp(search, 'g'), value),
-        starter);
-};
+const replaceAllWith = (searches: string[], value: string, starter: string): string =>
+    searches.reduce<string>(
+        (accumulator, search): string => accumulator.replace(new RegExp(search, 'g'), value),
+        starter,
+    );
 
 const getPunishableMentions = (mentions: MessageMentions) => {
     const courseStaffId = getConfig(ConfigKey.courseStaffId);
@@ -43,11 +43,11 @@ const getPunishableMentions = (mentions: MessageMentions) => {
     return {tas, mentionedCourseStaff};
 };
 
-const spongebobbify = (message: string) => message
-    .split("")
-    .map((char, index) =>
-        index % 2 === 0 ? char.toLowerCase() : char.toUpperCase())
-    .join("");
+const spongebobbify = (message: string) =>
+    message.split("")
+        .map((char, index) =>
+            index % 2 === 0 ? char.toLowerCase() : char.toUpperCase())
+        .join("");
 
 export {replaceAllWith};
 export default spongebob;
