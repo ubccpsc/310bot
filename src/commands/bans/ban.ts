@@ -20,7 +20,7 @@ const ban: Command = {
             } else {
                 const [word] = args;
                 const cleanedWord = removeMarkdown(word);
-                const banRequester = message.author.username;
+                const banRequester = message.author.id;
                 try {
                     await banImpl(cleanedWord, banRequester);
                     reply = `Banned \`${cleanedWord.toLowerCase()}\``;

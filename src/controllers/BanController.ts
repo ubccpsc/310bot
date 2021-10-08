@@ -14,7 +14,7 @@ const getBannedWord = async (): Promise<string> => {
 };
 
 const getBanRequester = async(): Promise<string> => {
-    return (await db.get<BannedWordEntity>("settings", "banned-word")).banRequester;
+    return (await db.get<BannedWordEntity>("settings", "banned-word"))?.banRequester;
 };
 
 const ban = async (word: string, banRequester: string): Promise<void> => {

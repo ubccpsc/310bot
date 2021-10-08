@@ -1,4 +1,3 @@
-
 import {Command} from "@ubccpsc310/bot-base";
 import {Client, Message} from "discord.js";
 import {getBanRequester as whoBannedImpl, getBannedWord as bannedWordImpl} from "../../controllers/BanController";
@@ -9,7 +8,7 @@ const whoBanned: Command = {
     usage: "whobanned",
     procedure: async (client: Client, message: Message) => {
         const bannedWord = await bannedWordImpl();
-        const reply = bannedWord != "" ? `${await whoBannedImpl()} has requested the ban` : `No word banned`;
+        const reply = bannedWord !== "" ? `<@!${await whoBannedImpl()}> has requested the ban` : `No word banned`;
         return message.channel.send(reply);
     },
 };
