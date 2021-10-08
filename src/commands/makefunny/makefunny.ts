@@ -17,6 +17,7 @@ const makefunny: Command = {
     usage: "makefunny on a message with a png attached",
     procedure: async (client: Client, message: Message) => {
         if (message.attachments.size === 1) {
+            await message.channel.sendTyping();
             const img = message.attachments.entries().next().value[1];
             const imgurl = img.attachment;
             const imght = img.height;

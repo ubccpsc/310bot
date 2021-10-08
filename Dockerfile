@@ -30,6 +30,8 @@ ENV LOG_LEVEL=INFO
 
 WORKDIR /app
 
+RUN mkdir data && touch data/buffer.png
+
 COPY --from=BUILDER /tmp/dist ./dist
 COPY --from=BUILDER /tmp/node_modules ./node_modules
 
