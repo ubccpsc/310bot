@@ -18,8 +18,9 @@ const getMessageSendersActualName = (content: string): string => {
     const lowerCaseContent = content.toLowerCase();
     const regex = /(?:^|\s)\s*(im|i'm|i am)\s+(.*)/;
     const match = lowerCaseContent.match(regex);
-  
+
     return match?.at(2);
 };
 
+export {getMessageSendersActualName};
 export default dad;
