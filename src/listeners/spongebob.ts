@@ -1,5 +1,5 @@
 import {Listener} from "@ubccpsc310/bot-base";
-import {Client, Collection, GuildMember, Message, MessageMentions} from "discord.js";
+import {Client, GuildMember, Message, MessageMentions} from "discord.js";
 import {ConfigKey, getConfig} from "../util/Config";
 import {isStudent} from "../util/Util";
 
