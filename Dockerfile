@@ -2,11 +2,6 @@ FROM node:16-alpine AS BUILDER
 
 WORKDIR /tmp
 
-COPY ./src          ./src
-COPY ./package.json ./package.json
-COPY tsconfig.json  ./
-COPY yarn.lock      ./
-
 RUN apk add --no-cache \
         sudo \
         curl \
@@ -19,6 +14,11 @@ RUN apk add --no-cache \
         cairo-dev \
         giflib-dev \
         py-pip
+
+COPY ./src          ./src
+COPY ./package.json ./package.json
+COPY tsconfig.json  ./
+COPY yarn.lock      ./
 
 RUN yarn install
 RUN yarn tsc
