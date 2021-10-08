@@ -11,7 +11,7 @@ const spongebob: Listener<"messageCreate"> = {
         if (!(await isStudent(message.author.id, message.guild))) return;
 
         const {tas, mentionedCourseStaff} = getPunishableMentions(message.mentions);
-        if (!mentionedCourseStaff && tas.size === 0) return;
+        if (!mentionedCourseStaff && tas.length === 0) return;
 
         const withCourseStaffReplaced = replaceAllWith(
             [getConfig(ConfigKey.courseStaffId)],
@@ -19,7 +19,7 @@ const spongebob: Listener<"messageCreate"> = {
             spongebobbify(message.content),
         );
         const withTAsReplaced = replaceAllWith(
-            tas.map((member) => member.id),
+            tas,
             message.author.id,
             withCourseStaffReplaced,
         );
@@ -37,8 +37,10 @@ const replaceAllWith = (searches: string[], value: string, starter: string): str
 const getPunishableMentions = (mentions: MessageMentions) => {
     const courseStaffId = getConfig(ConfigKey.courseStaffId);
     const {members, roles} = mentions;
-    const tas = members.filter((member: GuildMember) =>
-        member.roles.valueOf().has(courseStaffId));
+    const tas = members
+        .filter((member: GuildMember) =>
+            member.roles.valueOf().has(courseStaffId))
+        .map((member) => member.id);
     const mentionedCourseStaff = roles.has(courseStaffId);
     return {tas, mentionedCourseStaff};
 };
