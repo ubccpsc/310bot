@@ -6,7 +6,7 @@ const dad: Listener<"messageCreate"> = {
     procedure: async (client: Client, message: Message) => {
         if (message.author.bot) return;
 
-        const messageSendersActualName = getMessageSendersActualName(message.cleanContent)
+        const messageSendersActualName = getMessageSendersActualName(message.cleanContent);
         if (messageSendersActualName == null) return; // u have no name
 
         const messageToSend = "Hi " + messageSendersActualName + ", I'm dad!";
@@ -15,23 +15,11 @@ const dad: Listener<"messageCreate"> = {
 };
 
 const getMessageSendersActualName = (content: string): string => {
-    const wordsToSearchFor = ["im", "i'm", "i am"];
     const lowerCaseContent = content.toLowerCase();
-
-    for (const wordToSearchFor of wordsToSearchFor) {
-        const matches = lowerCaseContent.match("(?:^| ) ?" + wordToSearchFor + " ?(.*)(?:$| )")
-
-        // did we find the word to search for in the message content?
-        if (matches) {
-            const name = matches[1]
-
-            if (name != "") {
-                return name
-            }
-        }
-    }
-
-    return null;
+    const regex = /(?:^|\s)\s*(im|i'm|i am)\s+(.*)/;
+    const match = lowerCaseContent.match(regex);
+  
+    return match?.at(2);
 };
 
 export default dad;
