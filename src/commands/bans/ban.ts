@@ -20,8 +20,9 @@ const ban: Command = {
             } else {
                 const [word] = args;
                 const cleanedWord = removeMarkdown(word);
+                const banRequester = message.author.id;
                 try {
-                    await banImpl(cleanedWord);
+                    await banImpl(cleanedWord, banRequester);
                     reply = `Banned \`${cleanedWord.toLowerCase()}\``;
                 } catch (e) {
                     reply = e?.message ?? `That word can't be banned`;
