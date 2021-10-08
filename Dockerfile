@@ -30,6 +30,21 @@ ENV LOG_LEVEL=INFO
 
 WORKDIR /app
 
+# figure out how to deal with this duplication
+# at a later date. rn i'm mad
+RUN apk add --no-cache \
+        sudo \
+        curl \
+        build-base \
+        g++ \
+        libpng \
+        libpng-dev \
+        jpeg-dev \
+        pango-dev \
+        cairo-dev \
+        giflib-dev \
+        py-pip
+
 RUN mkdir data && touch data/buffer.png
 
 COPY --from=BUILDER /tmp/dist ./dist
