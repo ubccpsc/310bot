@@ -12,7 +12,7 @@
     "dotenv": "^10.0.0",
     "fs-extra": "^10.0.0",
     "imagizer": "^0.4.4",
-    "request": "2.88.2"
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@tsconfig/node14": "^1.0.1",

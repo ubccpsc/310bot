@@ -5,14 +5,15 @@ import { Client, Message } from "discord.js";
 // Violets do grow
 // I don't know shit about javascript
 // but I can copy from stackoverflow
-const imagizer = require("imagizer");
-const request = require('request');
+import imagizer = require("imagizer");
+// const request = require('request');
+import request from "request";
 import * as fs from 'fs';
 
 
 
 
-const bufferpath = "./data/buffer.png"
+const bufferpath = "./data/buffer.png";
 
 const makefunny: Command = {
     name: "makefunny",
