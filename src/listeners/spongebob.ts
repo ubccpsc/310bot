@@ -1,5 +1,5 @@
 import {Listener} from "@ubccpsc310/bot-base";
-import {Client, GuildMember, Message, MessageMentions} from "discord.js";
+import {Client, Collection, GuildMember, Message, MessageMentions} from "discord.js";
 import {ConfigKey, getConfig} from "../util/Config";
 import {isStudent} from "../util/Util";
 
@@ -13,15 +13,25 @@ const spongebob: Listener<"messageCreate"> = {
         const {tas, mentionedCourseStaff} = getPunishableMentions(message.mentions);
         if (!mentionedCourseStaff && tas.size === 0) return;
 
-        const spongebobbedContent = spongebobbify(message.content);
-        const courseStaffId = getConfig(ConfigKey.courseStaffId);
-        const studentId = getConfig(ConfigKey.studentId);
-        const withCourseStaffReplaced = spongebobbedContent.replace(new RegExp(courseStaffId, 'g'), studentId);
-        const withTAsReplaced = tas.reduce((accumulator, member): string =>
-                accumulator.replace(new RegExp(member.id, 'g'), message.author.id),
-            withCourseStaffReplaced);
+        const withCourseStaffReplaced = replaceAllWith(
+            [getConfig(ConfigKey.courseStaffId)],
+            getConfig(ConfigKey.studentId),
+            spongebobbify(message.content),
+        );
+        const withTAsReplaced = replaceAllWith(
+            tas.map((member) => member.id),
+            message.author.id,
+            withCourseStaffReplaced,
+        );
+
         return message.channel.send(withTAsReplaced);
     }
+};
+
+const replaceAllWith = (searches: string[], value: string, starter: string): string => {
+    return searches.reduce<string>((accumulator, search): string =>
+            accumulator.replace(new RegExp(search, 'g'), value),
+        starter);
 };
 
 const getPunishableMentions = (mentions: MessageMentions) => {
@@ -39,4 +49,5 @@ const spongebobbify = (message: string) => message
         index % 2 === 0 ? char.toLowerCase() : char.toUpperCase())
     .join("");
 
+export {replaceAllWith};
 export default spongebob;
