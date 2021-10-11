@@ -16,7 +16,7 @@ const dad: Listener<"messageCreate"> = {
 
 const getMessageSendersActualName = (content: string): string => {
     const lowerCaseContent = content.toLowerCase();
-    const regex = /(?:^|\s|\W)\s*(im|i'm|i[ ]+am)\s+([^\s\W]+)/;
+    const regex = /(?:^|\s|\W)\s*(im|i'm|i[ ]+am)\s+(.+)/;
     const match = lowerCaseContent.match(regex);
 
     return match?.at(2);
