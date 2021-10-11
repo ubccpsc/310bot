@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  test:
     runs-on: self-hosted
 
     strategy:
@@ -23,7 +23,7 @@ jobs:
           load: true
           tags: bot-pull:${{ github.sha }}
           push: false
-      - name: Run
+      - name: Run Tests
         uses: addnab/docker-run-action@v3
         with:
           image: bot-pull:${{ github.sha }}
