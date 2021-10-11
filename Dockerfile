@@ -16,7 +16,6 @@ RUN apk add --no-cache \
         py-pip
 
 COPY ./src          ./src
-COPY ./data         ./data
 COPY ./package.json ./package.json
 COPY tsconfig.json  ./
 COPY yarn.lock      ./
@@ -44,8 +43,6 @@ RUN apk add --no-cache \
         cairo-dev \
         giflib-dev \
         py-pip
-
-RUN mkdir data && touch data/buffer.png
 
 COPY --from=BUILDER /tmp/dist ./dist
 COPY --from=BUILDER /tmp/node_modules ./node_modules
