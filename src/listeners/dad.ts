@@ -10,7 +10,7 @@ const dad: Listener<"messageCreate"> = {
         if (messageSendersActualName == null) return; // u have no name
 
         const messageToSend = "Hi " + messageSendersActualName + ", I'm dad!";
-        return message.channel.send(messageToSend);
+        // return message.channel.send(messageToSend); disabling bot for now!
     }
 };
 
