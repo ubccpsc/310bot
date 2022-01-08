@@ -1,0 +1,46 @@
+name: Run tests in Container
+
+on:
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: self-hosted
+
+    strategy:
+      matrix:
+        node: [ 16.x ]
+
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Build
+        uses: docker/build-push-action@v2
+        with:
+          load: true
+          tags: bot-pull:${{ github.sha }}
+          push: false
+      - name: Run Tests
+        uses: addnab/docker-run-action@v3
+        with:
+          image: bot-pull:${{ github.sha }}
+          run: yarn test # Run inside to ensure things are going to work lol
+      - name: Clean up old containers
+        run: |
+          ids=$(docker ps -a | awk -v i="^$1.*" '{if($2~"bot-pull"){print$1}}')
+          for id in $ids
+          do
+           echo "$id"
+           docker stop $id && docker rm $id
+          done
+      - name: Clean up old images
+        run: |
+          ids=$(docker images -q --filter reference=bot-pull)
+          for id in $ids
+          do
+           echo "$id"
+           docker rmi $id
+          done
