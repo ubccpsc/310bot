@@ -1,4 +1,4 @@
-# CPSC 310 2021W1 Discord ⊥ (`\bot`)
+# CPSC 310 Discord ⊥ (`\bot`)
 
 Known as `@\bot` in our Discord server.
 
