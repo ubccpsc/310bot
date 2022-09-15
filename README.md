@@ -57,6 +57,7 @@ Deepfries a PNG image. Call with the PNG image attached.
 ### Other
 - **Mention**: Mentioning the bot in a message to a server channel will have it reply to you with usage instructions
 - **Dad**: Will randomly make dad jokes if you dare use the forbidden phrase "im" (or a derivate of that) in your discord message.
+- **Cooldown**: Will inform you of your doubled autobot cooldown time when you mention autobot
 - **TA Protection**: Mentioning a TA with a question results in punishment!
 
 ## Development
