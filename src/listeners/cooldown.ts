@@ -7,7 +7,7 @@ const cooldown: Listener<"messageCreate"> = {
         if (message.author.bot) return;
 
         if (message.content.toLowerCase().includes("cooldown"))  {
-            const messageToSend = `Hi ${message.author.username}, it seems you have complained about about the autobot's cooldown time. We have graciously doubled your cooldown time in response, have a nice day :smiley:`;
+            const messageToSend = `Hi ${message.author.toString()}, it seems you have complained about about the autobot's cooldown time. We have graciously doubled your cooldown time in response, have a nice day :smiley:`;
             return message.channel.send(messageToSend);
         }
     }
