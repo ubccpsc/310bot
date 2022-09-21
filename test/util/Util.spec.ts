@@ -123,5 +123,9 @@ describe("Util", function () {
         it("should censor capital vowels", function () {
             return expect(censorWord("A")).to.eql("*");
         });
+
+        it("should censor the empty string", function () {
+            return expect(censorWord("")).to.eql("");
+        });
     });
 });
