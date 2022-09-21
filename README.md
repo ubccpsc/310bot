@@ -54,6 +54,17 @@ requested to ban the current banned world.
 #### `$makefunny`
 Deepfries a PNG image. Call with the PNG image attached.  
 
+#### `$feedback <word>+`
+Adds to the list of words that the bot will give feedback to when a post is particularly unhelpful.
+
+Example:
+```
+$feedback unhinged refund integrity
+```
+
+#### `$reset`
+This command resets the words which the bot will provide feedback to
+
 ### Other
 - **Mention**: Mentioning the bot in a message to a server channel will have it reply to you with usage instructions
 - **Dad**: Will randomly make dad jokes if you dare use the forbidden phrase "im" (or a derivate of that) in your discord message.
